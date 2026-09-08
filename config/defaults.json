@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "display": {
+    "scale": 1.25,
+    "minimumScale": 0.75,
+    "maximumScale": 2.0,
+    "alwaysOnTop": true,
+    "snapDistanceDip": 16,
+    "startWithWindows": false
+  },
+  "behavior": {
+    "summonDirectSeconds": 8,
+    "recentInteractionDirectSeconds": 12,
+    "idleAfterSeconds": 20,
+    "boredAfterSeconds": 600,
+    "bubbleVisibleSeconds": 8,
+    "idleVariants": ["idle-calm", "idle-curious", "idle-sleepy"]
+  },
+  "usage": {
+    "providerOrder": ["codex-app-server", "snapshot-file"],
+    "pollSeconds": 120,
+    "minimumManualRefreshSeconds": 30,
+    "staleAfterSeconds": 600,
+    "thresholdsRemainingPercent": [80, 60, 40, 20, 1]
+  }
+}
+

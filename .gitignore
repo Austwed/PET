@@ -1,0 +1,35 @@
+# .NET build output
+bin/
+obj/
+artifacts/
+TestResults/
+*.user
+*.suo
+
+# IDEs
+.vs/
+.vscode/
+.idea/
+
+# Local application state and logs
+usage-snapshot.json
+state.json
+logs/
+*.log
+
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+appsettings.local.json
+
+# Generated pet production intermediates
+assets/runs/
+assets/generated/
+qa/
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+

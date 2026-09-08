@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "description": "Synthetic cases for threshold and reset behavior. No account data is included.",
+  "cases": [
+    {
+      "name": "initial-snapshot-does-not-notify",
+      "previous": null,
+      "current": { "fiveHour": 76, "weekly": 94 },
+      "expectedEvents": []
+    },
+    {
+      "name": "cross-80-on-five-hour",
+      "previous": { "fiveHour": 81, "weekly": 94 },
+      "current": { "fiveHour": 80, "weekly": 94 },
+      "expectedEvents": [
+        { "window": "fiveHour", "lowestCrossedThreshold": 80, "markNotified": [80] }
+      ]
+    },
+    {
+      "name": "single-refresh-crosses-two-levels",
+      "previous": { "fiveHour": 61, "weekly": 94 },
+      "current": { "fiveHour": 39, "weekly": 94 },
+      "expectedEvents": [
+        { "window": "fiveHour", "lowestCrossedThreshold": 40, "markNotified": [60, 40] }
+      ]
+    },
+    {
+      "name": "both-windows-cross-in-one-refresh",
+      "previous": { "fiveHour": 42, "weekly": 82 },
+      "current": { "fiveHour": 19, "weekly": 79 },
+      "expectedEvents": [
+        { "window": "fiveHour", "lowestCrossedThreshold": 20, "markNotified": [40, 20] },
+        { "window": "weekly", "lowestCrossedThreshold": 80, "markNotified": [80] }
+      ],
+      "mergeIntoOneReaction": true
+    },
+    {
+      "name": "remaining-percent-increase-does-not-notify",
+      "previous": { "fiveHour": 19, "weekly": 79 },
+      "current": { "fiveHour": 23, "weekly": 79 },
+      "expectedEvents": []
+    },
+    {
+      "name": "one-percent-terminal-threshold",
+      "previous": { "fiveHour": 2, "weekly": 21 },
+      "current": { "fiveHour": 1, "weekly": 19 },
+      "expectedEvents": [
+        { "window": "fiveHour", "lowestCrossedThreshold": 1, "markNotified": [1] },
+        { "window": "weekly", "lowestCrossedThreshold": 20, "markNotified": [20] }
+      ],
+      "mergeIntoOneReaction": true
+    },
+    {
+      "name": "changed-reset-time-starts-new-period-without-crying",
+      "previous": {
+        "fiveHour": 1,
+        "weekly": 19,
+        "fiveHourResetsAt": "2026-09-08T20:00:00Z",
+        "weeklyResetsAt": "2026-09-12T20:00:00Z"
+      },
+      "current": {
+        "fiveHour": 100,
+        "weekly": 100,
+        "fiveHourResetsAt": "2026-09-09T01:00:00Z",
+        "weeklyResetsAt": "2026-09-15T20:00:00Z"
+      },
+      "expectedEvents": [],
+      "clearNotifiedFor": ["fiveHour", "weekly"]
+    },
+    {
+      "name": "stale-snapshot-does-not-notify",
+      "previous": { "fiveHour": 81, "weekly": 81 },
+      "current": { "fiveHour": 0, "weekly": 0, "status": "stale" },
+      "expectedEvents": []
+    }
+  ]
+}
+

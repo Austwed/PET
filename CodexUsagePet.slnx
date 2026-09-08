@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/CodexUsagePet.Core/CodexUsagePet.Core.csproj" />
+  <Project Path="src/CodexUsagePet.App/CodexUsagePet.App.csproj" />
+  <Project Path="tests/CodexUsagePet.Tests/CodexUsagePet.Tests.csproj" />
+</Solution>
+

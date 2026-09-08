@@ -2,7 +2,7 @@
 
 一个面向 Windows 的透明悬浮桌宠：以《崩坏：星穹铁道》风堇的 Q 版同人形象为角色基础，显示 Codex 的 5 小时与每周剩余用量，并根据召唤、空闲、悬停、点击和用量阈值播放对应动画。
 
-当前状态：**进行中；阶段 0 已完成，可以进入阶段 1。**
+当前状态：**进行中；阶段 1 已完成，可以进入阶段 2 主视觉制作。**
 
 ## 当前目标
 
@@ -12,6 +12,24 @@
 - 最终提供易启动的 Windows 可执行程序和 Codex 原生宠物包。
 
 完整实施方案见 [docs/PLAN.md](docs/PLAN.md)。
+
+## 运行阶段 1 占位版
+
+需要 Windows 10/11 和 .NET 10 Desktop Runtime：
+
+```powershell
+dotnet restore CodexUsagePet.slnx --configfile NuGet.Config
+dotnet build CodexUsagePet.slnx -c Release --no-restore
+dotnet run --project src/CodexUsagePet.App/CodexUsagePet.App.csproj -c Release --no-build
+```
+
+桌宠头部可点击，身体可拖动；托盘菜单可以召唤、隐藏、显示模拟用量、模拟消耗和退出。
+
+运行行为测试：
+
+```powershell
+dotnet run --project tests/CodexUsagePet.Tests/CodexUsagePet.Tests.csproj -c Release --no-build
+```
 
 ## 技术路线（暂定）
 
@@ -39,7 +57,7 @@ codex-usage-pet/
 
 正式构建产物放到工作区根目录的 `08_Exports/codex-usage-pet`。
 
-阶段 0 结果见 [docs/PHASE-0-REPORT.md](docs/PHASE-0-REPORT.md)，角色约束见 [docs/VISUAL-BRIEF.md](docs/VISUAL-BRIEF.md)。
+阶段报告见 [docs/PHASE-0-REPORT.md](docs/PHASE-0-REPORT.md) 和 [docs/PHASE-1-REPORT.md](docs/PHASE-1-REPORT.md)，角色约束见 [docs/VISUAL-BRIEF.md](docs/VISUAL-BRIEF.md)。
 
 ## 边界
 

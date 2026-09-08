@@ -186,7 +186,7 @@ Pet.App
 按 `hatch-pet` 工作流维护以下四步，一次只将一个步骤标为进行中：
 
 - [x] Getting 风堇 ready：已确定名称、描述、参考来源、风格和工作目录。
-- [ ] Imagining 风堇's main look：生成并确认主参考形象。
+- [x] Imagining 风堇's main look：已生成并确立主参考形象（2026-09-09）。
 - [ ] Picturing 风堇's poses：生成并验证标准动画与 16 个视线方向。
 - [ ] Hatching 风堇：组装、视觉 QA、v2 验证、打包和安装。
 

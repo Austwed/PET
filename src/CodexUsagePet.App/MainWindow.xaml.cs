@@ -1,5 +1,7 @@
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using CodexUsagePet.Core.Behavior;
 using CodexUsagePet.Core.Models;
@@ -13,8 +15,12 @@ public partial class MainWindow : Window
     private readonly ThresholdEngine _thresholdEngine;
     private readonly MockUsageProvider _usageProvider;
     private readonly DispatcherTimer _timer;
+    private readonly BitmapSource _spriteAtlas;
     private UsageSnapshot? _latestSnapshot;
     private PetState _lastState = PetState.Direct;
+    private PetState _visualState = PetState.Direct;
+    private int _frameIndex;
+    private DateTimeOffset _nextFrameAt;
     private DateTimeOffset _bubbleUntil;
 
     public MainWindow(
@@ -26,11 +32,14 @@ public partial class MainWindow : Window
         _stateMachine = stateMachine;
         _thresholdEngine = thresholdEngine;
         _usageProvider = usageProvider;
+        _spriteAtlas = LoadSpriteAtlas();
         _stateMachine.Start(DateTimeOffset.Now);
+
+        ApplySpriteVisual(PetState.Direct, DateTimeOffset.Now, reset: true);
 
         _timer = new DispatcherTimer(DispatcherPriority.Background)
         {
-            Interval = TimeSpan.FromMilliseconds(150),
+            Interval = TimeSpan.FromMilliseconds(80),
         };
         _timer.Tick += Timer_Tick;
         _timer.Start();
@@ -90,7 +99,11 @@ public partial class MainWindow : Window
             }
 
             _lastState = state;
-            ApplyPlaceholderVisual(state);
+            ApplySpriteVisual(state, now, reset: true);
+        }
+        else if (now >= _nextFrameAt)
+        {
+            ApplySpriteVisual(state, now, reset: false);
         }
 
         if (UsageBubble.Visibility == Visibility.Visible &&
@@ -183,19 +196,62 @@ public partial class MainWindow : Window
         return $"{Math.Max((int)remaining.TotalHours, 0)} 小时 {remaining.Minutes} 分";
     }
 
-    private void ApplyPlaceholderVisual(PetState state)
+    private void ApplySpriteVisual(PetState state, DateTimeOffset now, bool reset)
     {
-        (FaceGlyph.Text, StateText.Text) = state switch
+        var animation = GetAnimation(state);
+        if (reset || state != _visualState)
         {
-            PetState.Direct => ("◕‿◕", "直视"),
-            PetState.IdleCalm => ("◡‿◡", "安静待机"),
-            PetState.IdleCurious => ("◕‿◔", "好奇待机"),
-            PetState.IdleSleepy => ("－‿－", "困倦待机"),
-            PetState.Bored => ("¬_¬", "无聊"),
-            PetState.Expecting => ("✧‿✧", "期待"),
-            PetState.HeadPat => ("＞▽＜", "被摸头"),
-            PetState.Crying => ("ಥ﹏ಥ", "用量提醒"),
-            _ => ("◕‿◕", "直视"),
+            _visualState = state;
+            _frameIndex = 0;
+        }
+        else
+        {
+            _frameIndex = (_frameIndex + 1) % animation.FrameCount;
+        }
+
+        PetImage.Source = new CroppedBitmap(
+            _spriteAtlas,
+            new Int32Rect(
+                _frameIndex * 192,
+                animation.Row * 208,
+                192,
+                208));
+        StateText.Text = animation.Label;
+        _nextFrameAt = now.AddMilliseconds(animation.FrameMilliseconds);
+    }
+
+    private static (int Row, int FrameCount, int FrameMilliseconds, string Label) GetAnimation(
+        PetState state) => state switch
+        {
+            PetState.Direct => (3, 4, 160, "召唤 / 直视"),
+            PetState.IdleCalm => (0, 6, 180, "安静待机"),
+            PetState.IdleCurious => (8, 6, 180, "好奇待机"),
+            PetState.IdleSleepy => (0, 6, 300, "困倦待机"),
+            PetState.Bored => (5, 8, 210, "无聊"),
+            PetState.Expecting => (6, 6, 160, "期待"),
+            PetState.HeadPat => (4, 5, 140, "被摸头"),
+            PetState.Crying => (5, 8, 160, "用量提醒"),
+            _ => (0, 6, 180, "待机"),
         };
+
+    private static BitmapSource LoadSpriteAtlas()
+    {
+        var path = Path.Combine(
+            AppContext.BaseDirectory,
+            "assets",
+            "fengjin",
+            "spritesheet-preview.png");
+        if (!File.Exists(path))
+        {
+            throw new FileNotFoundException("找不到风堇预览图集。", path);
+        }
+
+        var image = new BitmapImage();
+        image.BeginInit();
+        image.CacheOption = BitmapCacheOption.OnLoad;
+        image.UriSource = new Uri(path, UriKind.Absolute);
+        image.EndInit();
+        image.Freeze();
+        return image;
     }
 }

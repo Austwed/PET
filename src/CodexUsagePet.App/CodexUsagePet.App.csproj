@@ -12,6 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CodexUsagePet.Core\CodexUsagePet.Core.csproj" />
     <Content Include="..\..\config\defaults.json" Link="config\defaults.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\assets\pets\fengjin\spritesheet-preview.png" Link="assets\fengjin\spritesheet-preview.png" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
-

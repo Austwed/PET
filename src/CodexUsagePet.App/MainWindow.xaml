@@ -38,36 +38,15 @@
               VerticalAlignment="Bottom"
               MouseEnter="PetSurface_MouseEnter"
               MouseLeave="PetSurface_MouseLeave">
-            <Ellipse Width="68" Height="174" Margin="0,46,144,0"
-                     HorizontalAlignment="Center" VerticalAlignment="Top"
-                     Fill="#FFF19DBB" Stroke="#FF8F526C" StrokeThickness="3" />
-            <Ellipse Width="68" Height="174" Margin="144,46,0,0"
-                     HorizontalAlignment="Center" VerticalAlignment="Top"
-                     Fill="#FFF19DBB" Stroke="#FF8F526C" StrokeThickness="3" />
-
-            <Path Data="M 72,166 L 120,134 L 168,166 L 187,244 L 53,244 Z"
-                  Fill="#FFC94E63" Stroke="#FF7D3449" StrokeThickness="4" />
-            <Path Data="M 84,169 L 120,145 L 156,169 L 146,231 L 94,231 Z"
-                  Fill="#FFFFF7EC" Stroke="#FFD6A05D" StrokeThickness="3" />
-            <Ellipse Width="148" Height="142" Margin="0,28,0,0"
-                     HorizontalAlignment="Center" VerticalAlignment="Top"
-                     Fill="#FFFFE4D8" Stroke="#FF8F526C" StrokeThickness="4" />
-            <Path Data="M 52,90 C 57,25 177,18 188,92 C 155,68 91,67 52,90 Z"
-                  Fill="#FFF08FAF" Stroke="#FF8F526C" StrokeThickness="4" />
-
-            <TextBlock x:Name="FaceGlyph"
-                       Margin="0,76,0,0"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Top"
-                       FontFamily="Microsoft YaHei UI"
-                       FontSize="31"
-                       FontWeight="SemiBold"
-                       Foreground="#FF3E6C68"
-                       Text="◕‿◕" />
-
-            <Ellipse Width="18" Height="18" Margin="105,151,0,0"
-                     HorizontalAlignment="Left" VerticalAlignment="Top"
-                     Fill="#FFF5C84C" Stroke="#FF9F6E2D" StrokeThickness="2" />
+            <Image x:Name="PetImage"
+                   Width="240"
+                   Height="260"
+                   Margin="0,0,0,8"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Stretch="Uniform"
+                   RenderOptions.BitmapScalingMode="HighQuality"
+                   SnapsToDevicePixels="True" />
 
             <Border x:Name="HeadHitArea"
                     Width="154" Height="145" Margin="0,25,0,0"
@@ -93,4 +72,3 @@
         </Grid>
     </Grid>
 </Window>
-

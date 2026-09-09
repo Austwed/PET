@@ -2,7 +2,7 @@
 
 一个面向 Windows 的透明悬浮桌宠：以《崩坏：星穹铁道》风堇的 Q 版同人形象为角色基础，显示 Codex 的 5 小时与每周剩余用量，并根据召唤、空闲、悬停、点击和用量阈值播放对应动画。
 
-当前状态：**进行中；阶段 2 已完成主视觉、9 行标准动画和 16 向视线，暂停在最终 v2 图集验证故障。**
+当前状态：**暂停；已保留可运行的真实风堇图集预览版，阶段 2 正式包仍停在最终 v2 图集验证故障。**
 
 ## 当前目标
 
@@ -13,7 +13,7 @@
 
 完整实施方案见 [docs/PLAN.md](docs/PLAN.md)。
 
-## 运行阶段 1 占位版
+## 运行当前预览版
 
 需要 Windows 10/11 和 .NET 10 Desktop Runtime：
 
@@ -23,7 +23,7 @@ dotnet build CodexUsagePet.slnx -c Release --no-restore
 dotnet run --project src/CodexUsagePet.App/CodexUsagePet.App.csproj -c Release --no-build
 ```
 
-桌宠头部可点击，身体可拖动；托盘菜单可以召唤、隐藏、显示模拟用量、模拟消耗和退出。
+当前版本加载 `assets/pets/fengjin/spritesheet-preview.png`：桌宠头部可点击，身体可拖动；托盘菜单可以召唤、隐藏、显示模拟用量、模拟消耗和退出。用量仍为模拟数据，图集仍有正式验证阻塞，适合本地查看进度而非正式发布。
 
 运行行为测试：
 

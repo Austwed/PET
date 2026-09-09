@@ -2,7 +2,7 @@
 
 一个面向 Windows 的透明悬浮桌宠：以《崩坏：星穹铁道》风堇的 Q 版同人形象为角色基础，显示 Codex 的 5 小时与每周剩余用量，并根据召唤、空闲、悬停、点击和用量阈值播放对应动画。
 
-当前状态：**进行中；阶段 1 已完成，可以进入阶段 2 主视觉制作。**
+当前状态：**进行中；阶段 2 已完成主视觉、9 行标准动画和 16 向视线，暂停在最终 v2 图集验证故障。**
 
 ## 当前目标
 
@@ -57,7 +57,7 @@ codex-usage-pet/
 
 正式构建产物放到工作区根目录的 `08_Exports/codex-usage-pet`。
 
-阶段报告见 [docs/PHASE-0-REPORT.md](docs/PHASE-0-REPORT.md) 和 [docs/PHASE-1-REPORT.md](docs/PHASE-1-REPORT.md)，角色约束见 [docs/VISUAL-BRIEF.md](docs/VISUAL-BRIEF.md)。
+阶段报告见 [docs/PHASE-0-REPORT.md](docs/PHASE-0-REPORT.md)、[docs/PHASE-1-REPORT.md](docs/PHASE-1-REPORT.md) 和 [docs/PHASE-2-CHECKPOINT.md](docs/PHASE-2-CHECKPOINT.md)，角色约束见 [docs/VISUAL-BRIEF.md](docs/VISUAL-BRIEF.md)。
 
 ## 边界
 
